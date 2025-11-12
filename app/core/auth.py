@@ -1,9 +1,10 @@
 from datetime import datetime, timedelta
 from typing import Optional, Union
-import hashlib
-import secrets
+from passlib.context import CryptContext
 from jose import JWTError, jwt
 from app.core.config import settings
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def create_access_token(
     subject: Union[str, int], 
@@ -45,17 +46,9 @@ def verify_token(token: str) -> Optional[dict]:
         return None
 
 def verify_password(plain_password: str, hashed_password: str) -> bool:
-    """Verify password against hash."""
-    # Extract salt and hash from stored password
-    try:
-        salt, stored_hash = hashed_password.split('$', 1)
-        computed_hash = hashlib.sha256((salt + plain_password).encode()).hexdigest()
-        return computed_hash == stored_hash
-    except ValueError:
-        return False
+    """Verify password against hash using bcrypt."""
+    return pwd_context.verify(plain_password, hashed_password)
 
 def get_password_hash(password: str) -> str:
-    """Get password hash with salt."""
-    salt = secrets.token_hex(16)
-    password_hash = hashlib.sha256((salt + password).encode()).hexdigest()
-    return f"{salt}${password_hash}"
+    """Get password hash using bcrypt."""
+    return pwd_context.hash(password)
