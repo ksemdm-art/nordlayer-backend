@@ -1,0 +1,14 @@
+# Placeholder файл для STL моделей
+# В реальном проекте здесь будут находиться STL файлы:
+# - dragon.stl
+# - device-case.stl
+# - geometric-vase.stl
+# - phone-holder.stl
+# - office-building.stl
+# - infinity-ring.stl
+# - cup-holder.stl
+# - surgical-trainer.stl
+# - warrior-mini.stl
+# - tool-organizer.stl
+# - wave-lamp.stl
+# - drone-frame.stl

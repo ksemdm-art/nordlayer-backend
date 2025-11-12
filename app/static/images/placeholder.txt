@@ -1,0 +1,14 @@
+# Placeholder файл для изображений проектов
+# В реальном проекте здесь будут находиться изображения:
+# - dragon-1.jpg, dragon-2.jpg, dragon-3.jpg
+# - device-case-1.jpg, device-case-2.jpg
+# - vase-1.jpg, vase-2.jpg, vase-3.jpg
+# - phone-holder-1.jpg, phone-holder-2.jpg
+# - building-1.jpg, building-2.jpg, building-3.jpg
+# - ring-1.jpg, ring-2.jpg
+# - cup-holder-1.jpg, cup-holder-2.jpg
+# - medical-1.jpg, medical-2.jpg
+# - warrior-1.jpg, warrior-2.jpg, warrior-3.jpg
+# - organizer-1.jpg, organizer-2.jpg
+# - lamp-1.jpg, lamp-2.jpg, lamp-3.jpg
+# - drone-1.jpg, drone-2.jpg

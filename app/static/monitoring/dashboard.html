@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NordLayer - System Monitoring Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #F4F7FA 0%, #E8EDF4 100%);
+            color: #1B2A41;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1B2A41 0%, #2A3B52 100%);
+            color: #F4F7FA;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(27, 42, 65, 0.1);
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+        }
+
+        .header p {
+            opacity: 0.8;
+            margin-top: 0.25rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(27, 42, 65, 0.08);
+            border: 1px solid rgba(142, 155, 174, 0.1);
+        }
+
+        .card h3 {
+            color: #1B2A41;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid rgba(142, 155, 174, 0.1);
+        }
+
+        .metric:last-child {
+            border-bottom: none;
+        }
+
+        .metric-label {
+            color: #8E9BAE;
+            font-size: 0.9rem;
+        }
+
+        .metric-value {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .status-healthy {
+            color: #10B981;
+        }
+
+        .status-warning {
+            color: #F59E0B;
+        }
+
+        .status-critical {
+            color: #EF4444;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(142, 155, 174, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #10B981 0%, #059669 100%);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .progress-fill.warning {
+            background: linear-gradient(90deg, #F59E0B 0%, #D97706 100%);
+        }
+
+        .progress-fill.critical {
+            background: linear-gradient(90deg, #EF4444 0%, #DC2626 100%);
+        }
+
+        .alert {
+            background: white;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            border-left: 4px solid;
+            box-shadow: 0 2px 8px rgba(27, 42, 65, 0.05);
+        }
+
+        .alert.critical {
+            border-left-color: #EF4444;
+            background: rgba(239, 68, 68, 0.02);
+        }
+
+        .alert.high {
+            border-left-color: #F59E0B;
+            background: rgba(245, 158, 11, 0.02);
+        }
+
+        .alert.medium {
+            border-left-color: #3B82F6;
+            background: rgba(59, 130, 246, 0.02);
+        }
+
+        .alert.low {
+            border-left-color: #8E9BAE;
+            background: rgba(142, 155, 174, 0.02);
+        }
+
+        .alert-title {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .alert-message {
+            color: #8E9BAE;
+            font-size: 0.9rem;
+        }
+
+        .alert-time {
+            color: #8E9BAE;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .refresh-btn {
+            background: linear-gradient(135deg, #C68642 0%, #B8763A 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+
+        .refresh-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .timestamp {
+            text-align: center;
+            color: #8E9BAE;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>NordLayer System Monitoring</h1>
+        <p>Real-time system metrics and alerts dashboard</p>
+    </div>
+
+    <div class="container">
+        <div style="text-align: center; margin-bottom: 2rem;">
+            <button class="refresh-btn" onclick="refreshData()">Refresh Data</button>
+        </div>
+
+        <div class="grid">
+            <!-- System Metrics -->
+            <div class="card">
+                <h3>System Resources</h3>
+                <div id="system-metrics">
+                    <div class="metric">
+                        <span class="metric-label">CPU Usage</span>
+                        <div style="text-align: right;">
+                            <span class="metric-value" id="cpu-value">--</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="cpu-progress"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Memory Usage</span>
+                        <div style="text-align: right;">
+                            <span class="metric-value" id="memory-value">--</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="memory-progress"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Disk Usage</span>
+                        <div style="text-align: right;">
+                            <span class="metric-value" id="disk-value">--</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="disk-progress"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Alert Summary -->
+            <div class="card">
+                <h3>Alert Summary</h3>
+                <div id="alert-summary">
+                    <div class="metric">
+                        <span class="metric-label">Active Alerts</span>
+                        <span class="metric-value" id="active-alerts">--</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Critical</span>
+                        <span class="metric-value status-critical" id="critical-alerts">--</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">High Priority</span>
+                        <span class="metric-value status-warning" id="high-alerts">--</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Application Status -->
+            <div class="card">
+                <h3>Application Status</h3>
+                <div id="app-status">
+                    <div class="metric">
+                        <span class="metric-label">API Status</span>
+                        <span class="metric-value status-healthy" id="api-status">Healthy</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Database</span>
+                        <span class="metric-value status-healthy" id="db-status">Connected</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Uptime</span>
+                        <span class="metric-value" id="uptime">--</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Alerts -->
+        <div class="card">
+            <h3>Recent Alerts</h3>
+            <div id="recent-alerts">
+                <p style="color: #8E9BAE; text-align: center; padding: 2rem;">Loading alerts...</p>
+            </div>
+        </div>
+
+        <div class="timestamp" id="last-updated">
+            Last updated: --
+        </div>
+    </div>
+
+    <script>
+        let isLoading = false;
+
+        async function fetchData(endpoint) {
+            try {
+                const response = await fetch(`/api/v1${endpoint}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                return await response.json();
+            } catch (error) {
+                console.error(`Error fetching ${endpoint}:`, error);
+                return null;
+            }
+        }
+
+        function updateProgressBar(elementId, value, max = 100) {
+            const element = document.getElementById(elementId);
+            const percentage = Math.min((value / max) * 100, 100);
+            element.style.width = `${percentage}%`;
+            
+            // Update color based on value
+            element.className = 'progress-fill';
+            if (percentage > 90) {
+                element.classList.add('critical');
+            } else if (percentage > 75) {
+                element.classList.add('warning');
+            }
+        }
+
+        function formatBytes(bytes) {
+            const sizes = ['B', 'KB', 'MB', 'GB'];
+            if (bytes === 0) return '0 B';
+            const i = Math.floor(Math.log(bytes) / Math.log(1024));
+            return Math.round(bytes / Math.pow(1024, i) * 100) / 100 + ' ' + sizes[i];
+        }
+
+        function formatTime(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleString();
+        }
+
+        async function updateSystemMetrics() {
+            const data = await fetchData('/status');
+            if (!data) return;
+
+            const system = data.system;
+            
+            // CPU
+            document.getElementById('cpu-value').textContent = `${system.cpu_percent.toFixed(1)}%`;
+            updateProgressBar('cpu-progress', system.cpu_percent);
+            
+            // Memory
+            const memoryPercent = system.memory_percent;
+            document.getElementById('memory-value').textContent = `${memoryPercent.toFixed(1)}%`;
+            updateProgressBar('memory-progress', memoryPercent);
+            
+            // Disk
+            document.getElementById('disk-value').textContent = `${system.disk_percent.toFixed(1)}%`;
+            updateProgressBar('disk-progress', system.disk_percent);
+            
+            // Alert summary
+            const alerts = data.alerts;
+            document.getElementById('active-alerts').textContent = alerts.active_count;
+            document.getElementById('critical-alerts').textContent = alerts.critical_count;
+            document.getElementById('high-alerts').textContent = alerts.high_count;
+        }
+
+        async function updateAlerts() {
+            const data = await fetchData('/alerts/history?limit=10');
+            if (!data) return;
+
+            const alertsContainer = document.getElementById('recent-alerts');
+            
+            if (data.length === 0) {
+                alertsContainer.innerHTML = '<p style="color: #8E9BAE; text-align: center; padding: 2rem;">No recent alerts</p>';
+                return;
+            }
+
+            alertsContainer.innerHTML = data.map(alert => `
+                <div class="alert ${alert.severity}">
+                    <div class="alert-title">${alert.title}</div>
+                    <div class="alert-message">${alert.message}</div>
+                    <div class="alert-time">${formatTime(alert.timestamp)}</div>
+                </div>
+            `).join('');
+        }
+
+        async function updateHealthStatus() {
+            const data = await fetchData('/health');
+            if (!data) {
+                document.getElementById('api-status').textContent = 'Unhealthy';
+                document.getElementById('api-status').className = 'metric-value status-critical';
+                return;
+            }
+
+            // API Status
+            const apiStatus = document.getElementById('api-status');
+            apiStatus.textContent = data.status === 'healthy' ? 'Healthy' : 'Degraded';
+            apiStatus.className = `metric-value ${data.status === 'healthy' ? 'status-healthy' : 'status-warning'}`;
+
+            // Database Status
+            const dbStatus = document.getElementById('db-status');
+            const dbComponent = data.components?.database;
+            if (dbComponent) {
+                dbStatus.textContent = dbComponent.status === 'healthy' ? 'Connected' : 'Error';
+                dbStatus.className = `metric-value ${dbComponent.status === 'healthy' ? 'status-healthy' : 'status-critical'}`;
+            }
+        }
+
+        async function refreshData() {
+            if (isLoading) return;
+            
+            isLoading = true;
+            document.body.classList.add('loading');
+            
+            try {
+                await Promise.all([
+                    updateSystemMetrics(),
+                    updateAlerts(),
+                    updateHealthStatus()
+                ]);
+                
+                document.getElementById('last-updated').textContent = 
+                    `Last updated: ${new Date().toLocaleString()}`;
+            } catch (error) {
+                console.error('Error refreshing data:', error);
+            } finally {
+                isLoading = false;
+                document.body.classList.remove('loading');
+            }
+        }
+
+        // Auto-refresh every 30 seconds
+        setInterval(refreshData, 30000);
+
+        // Initial load
+        refreshData();
+    </script>
+</body>
+</html>
