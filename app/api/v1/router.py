@@ -1,10 +1,11 @@
 from fastapi import APIRouter
-from .endpoints import projects, orders, articles, services, categories, auth, files, content, users, cms, colors, reviews, contact, webhooks, cache, health
+from .endpoints import projects, orders, articles, services, categories, auth, files, content, users, cms, colors, reviews, contact, webhooks, cache, health, files_proxy
 
 api_router = APIRouter()
 
 api_router.include_router(auth.router, prefix="/auth", tags=["authentication"])
 api_router.include_router(files.router, prefix="/files", tags=["files"])
+api_router.include_router(files_proxy.router, prefix="/files", tags=["files"])
 api_router.include_router(content.router, prefix="/content", tags=["content"])
 api_router.include_router(cms.router, prefix="/cms", tags=["cms"])
 api_router.include_router(projects.router, prefix="/projects", tags=["projects"])
