@@ -18,10 +18,9 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         """Create user with hashed password."""
         hashed_password = get_password_hash(obj_in.password)
         
-        # Set role based on is_admin flag or explicit role
+        # Set role and is_admin based on role field
         role = getattr(obj_in, 'role', 'user')
-        if getattr(obj_in, 'is_admin', False):
-            role = 'admin'
+        is_admin = role == 'admin' or getattr(obj_in, 'is_admin', False)
         
         db_obj = User(
             email=obj_in.email,
@@ -29,7 +28,7 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
             hashed_password=hashed_password,
             full_name=obj_in.full_name,
             is_active=obj_in.is_active,
-            is_admin=getattr(obj_in, 'is_admin', False),
+            is_admin=is_admin,
             role=role,
         )
         db.add(db_obj)
@@ -50,6 +49,10 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
             hashed_password = get_password_hash(update_data["password"])
             del update_data["password"]
             update_data["hashed_password"] = hashed_password
+        
+        # Sync is_admin with role
+        if "role" in update_data:
+            update_data["is_admin"] = update_data["role"] == "admin"
             
         return super().update(db, db_obj=db_obj, obj_in=update_data)
 
