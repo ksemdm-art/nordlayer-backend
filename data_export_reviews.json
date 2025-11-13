@@ -1,0 +1,47 @@
+[
+  {
+    "customer_name": "Ксения",
+    "customer_email": "ksemdm@gmail.com",
+    "rating": 5,
+    "title": "Вышел ножик из тумана",
+    "content": "Отличное качество, быстрое исполнение. Радуюсь",
+    "images": [
+      {
+        "url": "https://s3.twcstorage.ru/66fcbd3b-259fc9df-4acc-4f84-bb9b-1ab070192e19/uploads/reviews/0/7fbefcb1-f95e-4741-b68c-867ad22cae95.jpg",
+        "caption": "Изображение 1"
+      }
+    ],
+    "is_approved": true,
+    "is_featured": true
+  },
+  {
+    "customer_name": "Ллл",
+    "customer_email": "ksemdm@gmail.com",
+    "rating": 2,
+    "title": "Фууууу",
+    "content": "Сопли висят поддержки не убраны",
+    "images": null,
+    "is_approved": true,
+    "is_featured": false
+  },
+  {
+    "customer_name": "Тест Пользователь",
+    "customer_email": "test@example.com",
+    "rating": 5,
+    "title": "Тестовый отзыв",
+    "content": "Это тестовый отзыв для проверки работы API",
+    "images": null,
+    "is_approved": true,
+    "is_featured": true
+  },
+  {
+    "customer_name": "Лллл",
+    "customer_email": "k@g.com",
+    "rating": 5,
+    "title": "Отзыв",
+    "content": "Отзыв",
+    "images": null,
+    "is_approved": true,
+    "is_featured": true
+  }
+]

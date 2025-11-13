@@ -1,0 +1,223 @@
+[
+  {
+    "name": "Белый",
+    "type": "solid",
+    "hex_code": "#ffebeb",
+    "gradient_colors": null,
+    "gradient_direction": null,
+    "metallic_base": null,
+    "metallic_intensity": null,
+    "is_active": true,
+    "is_new": false,
+    "sort_order": 1,
+    "price_modifier": 1.0
+  },
+  {
+    "name": "Чёрный",
+    "type": "solid",
+    "hex_code": "#000000",
+    "gradient_colors": null,
+    "gradient_direction": null,
+    "metallic_base": null,
+    "metallic_intensity": null,
+    "is_active": true,
+    "is_new": false,
+    "sort_order": 4,
+    "price_modifier": 1.0
+  },
+  {
+    "name": "Красный",
+    "type": "solid",
+    "hex_code": "#FF0000",
+    "gradient_colors": null,
+    "gradient_direction": null,
+    "metallic_base": null,
+    "metallic_intensity": null,
+    "is_active": true,
+    "is_new": false,
+    "sort_order": 5,
+    "price_modifier": 1.0
+  },
+  {
+    "name": "Синий",
+    "type": "solid",
+    "hex_code": "#0000FF",
+    "gradient_colors": null,
+    "gradient_direction": null,
+    "metallic_base": null,
+    "metallic_intensity": null,
+    "is_active": true,
+    "is_new": false,
+    "sort_order": 6,
+    "price_modifier": 1.0
+  },
+  {
+    "name": "Зелёный",
+    "type": "solid",
+    "hex_code": "#00FF00",
+    "gradient_colors": null,
+    "gradient_direction": null,
+    "metallic_base": null,
+    "metallic_intensity": null,
+    "is_active": true,
+    "is_new": false,
+    "sort_order": 7,
+    "price_modifier": 1.0
+  },
+  {
+    "name": "Жёлтый",
+    "type": "solid",
+    "hex_code": "#FFFF00",
+    "gradient_colors": null,
+    "gradient_direction": null,
+    "metallic_base": null,
+    "metallic_intensity": null,
+    "is_active": true,
+    "is_new": false,
+    "sort_order": 8,
+    "price_modifier": 1.0
+  },
+  {
+    "name": "Оранжевый",
+    "type": "solid",
+    "hex_code": "#FFA500",
+    "gradient_colors": null,
+    "gradient_direction": null,
+    "metallic_base": null,
+    "metallic_intensity": null,
+    "is_active": true,
+    "is_new": false,
+    "sort_order": 9,
+    "price_modifier": 1.0
+  },
+  {
+    "name": "Фиолетовый",
+    "type": "solid",
+    "hex_code": "#800080",
+    "gradient_colors": null,
+    "gradient_direction": null,
+    "metallic_base": null,
+    "metallic_intensity": null,
+    "is_active": true,
+    "is_new": false,
+    "sort_order": 10,
+    "price_modifier": 1.0
+  },
+  {
+    "name": "Розовый",
+    "type": "solid",
+    "hex_code": "#FFC0CB",
+    "gradient_colors": null,
+    "gradient_direction": null,
+    "metallic_base": null,
+    "metallic_intensity": null,
+    "is_active": true,
+    "is_new": false,
+    "sort_order": 11,
+    "price_modifier": 1.0
+  },
+  {
+    "name": "Серый",
+    "type": "solid",
+    "hex_code": "#808080",
+    "gradient_colors": null,
+    "gradient_direction": null,
+    "metallic_base": null,
+    "metallic_intensity": null,
+    "is_active": true,
+    "is_new": false,
+    "sort_order": 12,
+    "price_modifier": 1.0
+  },
+  {
+    "name": "Коричневый",
+    "type": "solid",
+    "hex_code": "#A52A2A",
+    "gradient_colors": null,
+    "gradient_direction": null,
+    "metallic_base": null,
+    "metallic_intensity": null,
+    "is_active": true,
+    "is_new": false,
+    "sort_order": 13,
+    "price_modifier": 1.0
+  },
+  {
+    "name": "Прозрачный",
+    "type": "solid",
+    "hex_code": "#FFFFFF",
+    "gradient_colors": null,
+    "gradient_direction": null,
+    "metallic_base": null,
+    "metallic_intensity": null,
+    "is_active": true,
+    "is_new": false,
+    "sort_order": 14,
+    "price_modifier": 1.0
+  },
+  {
+    "name": "Тестовый градиент",
+    "type": "gradient",
+    "hex_code": null,
+    "gradient_colors": [
+      {
+        "color": "#f10404",
+        "position": 0.0
+      },
+      {
+        "color": "#000000",
+        "position": 50.0
+      },
+      {
+        "color": "#2ad2d5",
+        "position": 100.0
+      }
+    ],
+    "gradient_direction": "linear",
+    "metallic_base": null,
+    "metallic_intensity": null,
+    "is_active": true,
+    "is_new": false,
+    "sort_order": 15,
+    "price_modifier": 1.3
+  },
+  {
+    "name": "Тестовый металлик",
+    "type": "metallic",
+    "hex_code": null,
+    "gradient_colors": null,
+    "gradient_direction": null,
+    "metallic_base": "#228abf",
+    "metallic_intensity": 0.3,
+    "is_active": true,
+    "is_new": true,
+    "sort_order": 16,
+    "price_modifier": 1.5
+  },
+  {
+    "name": "Бордо",
+    "type": "solid",
+    "hex_code": "#792633",
+    "gradient_colors": null,
+    "gradient_direction": null,
+    "metallic_base": null,
+    "metallic_intensity": null,
+    "is_active": true,
+    "is_new": false,
+    "sort_order": 2,
+    "price_modifier": 1.0
+  },
+  {
+    "name": "Малиновый",
+    "type": "solid",
+    "hex_code": "#D33860",
+    "gradient_colors": null,
+    "gradient_direction": null,
+    "metallic_base": null,
+    "metallic_intensity": null,
+    "is_active": true,
+    "is_new": false,
+    "sort_order": 3,
+    "price_modifier": 1.0
+  }
+]

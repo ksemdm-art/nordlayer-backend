@@ -1,0 +1,62 @@
+[
+  {
+    "title": "Тестовый проект",
+    "description": "Описание тестового проекта для проверки админки",
+    "category": "miniatures",
+    "stl_file": null,
+    "is_featured": true,
+    "images": null,
+    "project_metadata": null,
+    "estimated_price": null,
+    "estimated_duration_hours": null,
+    "complexity_level": null,
+    "price_range_min": null,
+    "price_range_max": null
+  },
+  {
+    "title": "Простой тест",
+    "description": "Тестовый проект без изображений",
+    "category": "functional",
+    "stl_file": null,
+    "is_featured": false,
+    "images": null,
+    "project_metadata": null,
+    "estimated_price": null,
+    "estimated_duration_hours": null,
+    "complexity_level": null,
+    "price_range_min": null,
+    "price_range_max": null
+  },
+  {
+    "title": "Работающий тест",
+    "description": "Тестовый проект без изображений",
+    "category": "functional",
+    "stl_file": null,
+    "is_featured": false,
+    "images": null,
+    "project_metadata": null,
+    "estimated_price": null,
+    "estimated_duration_hours": null,
+    "complexity_level": null,
+    "price_range_min": null,
+    "price_range_max": null
+  },
+  {
+    "title": "111",
+    "description": "111111",
+    "category": "functional",
+    "stl_file": "http://localhost:8000/uploads/01d70bf9-dd65-47d2-b02a-018183118d0d.stl",
+    "is_featured": true,
+    "images": [
+      "https://s3.twcstorage.ru/66fcbd3b-259fc9df-4acc-4f84-bb9b-1ab070192e19/uploads/temp/041ebfcd-5317-4f4d-a411-fdb41889bf19.jpg",
+      "https://s3.twcstorage.ru/66fcbd3b-259fc9df-4acc-4f84-bb9b-1ab070192e19/uploads/temp/e6a1b235-b237-4436-9af3-59f8f1ff5697.jpg",
+      "https://s3.twcstorage.ru/66fcbd3b-259fc9df-4acc-4f84-bb9b-1ab070192e19/uploads/temp/ff510098-d0dc-4637-855e-ace91f2ee917.jpg"
+    ],
+    "project_metadata": null,
+    "estimated_price": null,
+    "estimated_duration_hours": 5,
+    "complexity_level": "medium",
+    "price_range_min": 500.0,
+    "price_range_max": 700.0
+  }
+]

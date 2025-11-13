@@ -13,9 +13,18 @@ from app.models.review import Review
 from datetime import datetime
 
 def serialize_datetime(obj):
-    """JSON serializer for datetime objects"""
+    """JSON serializer for datetime and decimal objects"""
     if isinstance(obj, datetime):
         return obj.isoformat()
+    if isinstance(obj, (int, float)):
+        return obj
+    # Convert Decimal to float
+    try:
+        from decimal import Decimal
+        if isinstance(obj, Decimal):
+            return float(obj)
+    except:
+        pass
     raise TypeError(f"Type {type(obj)} not serializable")
 
 def export_table(db: Session, model, filename: str):
