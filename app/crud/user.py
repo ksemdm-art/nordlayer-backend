@@ -18,16 +18,16 @@ class CRUDUser(CRUDBase[User, UserCreate, UserUpdate]):
         """Create user with hashed password."""
         hashed_password = get_password_hash(obj_in.password)
         
-        # Set role and is_admin based on role field
-        role = getattr(obj_in, 'role', 'user')
-        is_admin = role == 'admin' or getattr(obj_in, 'is_admin', False)
+        # Determine role and is_admin - role field takes precedence
+        role = obj_in.role if hasattr(obj_in, 'role') and obj_in.role else 'user'
+        is_admin = (role == 'admin')
         
         db_obj = User(
             email=obj_in.email,
             username=obj_in.username,
             hashed_password=hashed_password,
-            full_name=obj_in.full_name,
-            is_active=obj_in.is_active,
+            full_name=obj_in.full_name if obj_in.full_name else None,
+            is_active=obj_in.is_active if hasattr(obj_in, 'is_active') else True,
             is_admin=is_admin,
             role=role,
         )
