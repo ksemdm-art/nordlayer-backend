@@ -12,7 +12,6 @@ class UserBase(BaseSchema):
 
 class UserCreate(UserBase):
     password: str
-    is_admin: bool = False
 
 class UserUpdate(BaseSchema):
     username: Optional[str] = None
